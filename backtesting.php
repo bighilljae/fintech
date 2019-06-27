@@ -33,19 +33,17 @@
 <div id="wrapper">
 		<header id="header">
 			<div class="container">
-				<div class="logo"><a href="#"><img src="images/logo.svg" alt="FORKIO"></a></div>
+				<div class="logo"><a href="index.html"><img src="images/logo4.jpg" alt="FORKIO"></a></div>
 				<nav id="nav">
 					<div class="opener-holder">
 						<a href="#" class="nav-opener"><span></span></a>
 					</div>
-					<a href="http://tympanus.net/codrops/?p=23525" class="btn btn-primary rounded">로그인</a>
+					<a href="http://tympanus.net/codrops/?p=23525" class="btn btn-primary rounded">투자자/개발자</a>
 					<div class="nav-drop">
 						<ul>
-							<li class="active visible-sm visible-xs"><a href="#">Home</a></li>
-							<li><a href="index.html">Stock Plantation</a></li>
-							<li><a href="doc.html">Documentation</a></li>
-							<li><a href="backtesting.html">Backtesting</a></li>
-							<li><a href="commit.html">Commit</a></li>
+							<li><a href="index.html">About Stock Plantation</a></li>
+							<li><a href="doc.html">API Documentation</a></li>
+							<li><a href="backtesting.php">Backtesting & Commit</a></li>
 						</ul>
 						<div class="drop-holder visible-sm visible-xs">
 							<span>Follow Us</span>
@@ -63,16 +61,49 @@
 		<div class="container">
 			<div class="row">
 				<div class="text-box col-md-offset-1 col-md-10">
-                    <h2>C</h2>
-                    <h2>Commit</h2>
-                    <p>
-                        Let's have a long description of how the DOC is gonna be like.
-                    </p>
+					<h2>Invest</h2>
+					<h2>Invest</h2>
 				</div>
 			</div>
 		</div>
+		<div class="list col-md-3">
+				<ul>
+				  <li><a href="backtesting.php?id=1">
+					<img src="images/model1.jpg" />
+					<h3>Model 1</h3>
+					</a>
+				  </li>	
+				  <li><a href="backtesting.php?id=2"></a>
+					<img src="images/model2.jpg" />
+					<h3>Model 2</h3>
+					</a>
+				  </li>
+				  <li><a href="backtesting.php?id=3"></a>
+					<img src="images/model3.jpg" />
+					<h3>Model 3</h3>
+					</a>
+				  </li>
+				  <li><a href="backtesting.php?id=4"></a>
+					<img src="images/model4.jpg" />
+					<h3>Model 4</h3>
+					</a>
+				  </li>
+				</ul>
+		</div>
 	</section>
+	<div class="container col-md-offset-1 col-md-7">
+			<article>
+				<?php
+					if( empty($_GET['id']) == false ) {
+						echo file_get_contents($_GET['id'].".txt");
+					} else {
+						echo "<h2>Choose a model u bitch!</h2>";
+					}
+				?>
+			</article>
+	</div>
 </div>
+
 <script src="js/jquery-1.11.2.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/jquery.main.js"></script>

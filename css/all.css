@@ -72,7 +72,7 @@ p {
   left: 0;
   width: 100%;
   z-index: 99;
-  padding: 31px 0 32px;
+  padding: 25px 0 35px;
   background: #fff;
   box-shadow: 0 1px 1px rgba(196, 194, 202, 0.23);
   -webkit-backface-visibility: hidden;
@@ -1203,3 +1203,33 @@ p {
     pointer-events: none; } }
 
 /*# sourceMappingURL=all.css.map */
+
+/*Custom CSS*/
+.list {
+  margin: 20px;
+
+}
+ 
+.list ul {
+  list-style-type: none;
+  width: 500px;
+}
+ 
+.list li img {
+  width: 50%;
+  height: auto;
+  float: left;
+  margin: 0 15px 0 0;
+}
+ 
+.list li {
+  padding: 10px;
+  overflow: auto;
+}
+ 
+.list li:hover {
+  background: #eee;
+  cursor: pointer;
+}
+
+/*Custom CSS*/
