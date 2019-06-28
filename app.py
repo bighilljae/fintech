@@ -6,7 +6,7 @@ id_list = [{'item1': 'https://datastudio.google.com/embed/reporting/1BPUO86dh2Kd
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return app.send_static_file('index.html')
 
 @app.route('/backtesting.html')
 def backtest():
