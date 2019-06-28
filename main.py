@@ -42,7 +42,7 @@ def upload():
         pi = open('result/{}.pickle'.format(f.filename), 'wb')
         pickle.dump(history, pi, protocol=pickle.HIGHEST_PROTOCOL)
         pi.close()
-        return app.send_static_file('backtesting1.html')
+        return app.send_static_file('model_result.html')
     return 'fail'
 
 @app.route('/history')
