@@ -36,61 +36,69 @@
 	<script>
 		$(document).ready(() => {
 			// balance chart(line chart) data
-			data = [20000, 14000, 12000, 15000, 18000, 19000, 22000];	// red
-			data2 = [18000, 19000, 22000, 20000, 14000, 12000, 15000];	// blue
+			// data = [20000, 14000, 12000, 15000, 18000, 19000, 22000];	// red
+			// data2 = [18000, 19000, 22000, 20000, 14000, 12000, 15000];	// blue
+			url = new URL(location.href);
+			model = url.searchParams.get("model");
+			var data, portfolio;
+			jQuery.get('/history', {model: model}, (res)=>{
+				r = JSON.parse(res);
+				data = r.li.map( el => (el/400) );
+				balance_labels = r.xlabel;
+				portfolio = r.today.map( el => (el/400) );
 
-			// balance chart(line chart) label
-			balance_labels =  ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];			
-			// pie chart label
-			portfolio_labels = ["삼성전기", "SK하이닉스", "LG", "정호용", "멍청이"]
-
-			var balanceId = document.getElementById("balanceChart").getContext('2d');
-            var balanceChart = new Chart(balanceId, {
-                type: 'line',
-                data: {
-                    labels: balance_labels,
-                    datasets: [{
-						label: 'Profit(proposed model)',
-						fill: false,
-						data: data,
-						lineTension: 0,
-						borderColor: 'red',
-                    }/*, {
-						label: 'data',
-						fill: false,
-						data: data2,
-						lineTension: 0,
-						borderColor: 'blue'
-					}*/]
-				},
-				options:{
-					scales: {
-						yAxes : [{
-							ticks : {
-								min : 0,
-								max : 50000,
-							},
-						}],
+				// balance chart(line chart) label
+				// balance_labels =  ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];			
+				// pie chart label
+				portfolio_labels = ["삼성전자","현대차","POSCO","현대모비스","LG화학","한국전력","SK하이닉스","신한지주","NAVER","KB금융","현금"]
+				var balanceId = document.getElementById("balanceChart").getContext('2d');
+				var balanceChart = new Chart(balanceId, {
+					type: 'line',
+					data: {
+						labels: balance_labels,
+						datasets: [{
+							label: 'Portfolio',
+							fill: false,
+							data: data,
+							lineTension: 0,
+							borderColor: 'red',
+							borderWidth: 1
+						}/*, {
+							label: 'data',
+							fill: false,
+							data: data2,
+							lineTension: 0,
+							borderColor: 'blue'
+						}*/]
 					},
-					elements: {
-						point:{
-							radius: 0
+					options:{
+						scales: {
+							yAxes : [{
+								ticks : {
+								},
+							}],
 						},
-                	},
-				},
+						elements: {
+							point:{
+								radius: 0
+							},
+						},
+					},
+				});
+				
+				var portfolioId = document.getElementById("portfolioChart").getContext('2d');
+				var portfolioChart = new Chart(portfolioId, {
+					type: 'pie',
+					data: {
+						labels: portfolio_labels,
+						datasets: [{
+							data: portfolio,
+							borderColor: 'green',
+						}]
+					},
+				});
 			});
 			
-			var portfolioId = document.getElementById("portfolioChart").getContext('2d');
-			var portfolioChart = new Chart(portfolioId, {
-                type: 'pie',
-                data: {
-                    labels: portfolio_labels,
-                    datasets: [{
-						data: data,
-						borderColor: 'green',
-					}]
-				},
-            });
 		});
 	</script>
 	
