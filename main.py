@@ -2,7 +2,6 @@ from flask import Flask, request, render_template
 import pickle
 import os.path
 import sys
-import asyncio
 
 app = Flask(__name__, static_folder='static/', static_url_path='')
 
@@ -20,7 +19,7 @@ def backtest():
     id = int(request.args.get('id')) - 1
     return render_template('user_model_list.html', item1=id_list[id]['item1'], item2=id_list[id]['item2'])
 
-@app.route('/modelUpload')
+@app.route('/model', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
         f = request.files['file']
@@ -30,15 +29,18 @@ def upload():
         history = {}
         for c in cc:
             os.system('python evaluate.py {} {}'.format(c, f.filename))
-            f = open('temp/res_{}.csv'.format(c), 'r')
-            lines = f.readlines()
+            csv = open('temp/res_{}.csv'.format(c), 'r')
+            lines = csv.readlines()
             for line in lines:
                 dt, ct, pd, cp = line.split(',')
-                if history[dt] is None:
+                if not dt in history:
                     history[dt] = {}
-                history[dt][c] = {}
-            f.close()
-        return 'suc'
+                history[dt][c] = [ct, pd, cp]
+            csv.close()
+        pi = open('result/{}.pickle'.format(f.filename), 'wb')
+        pickle.dump(history, pi, protocol=pickle.HIGHEST_PROTOCOL)
+        pi.close()
+        return app.send_static_file('backtesting1.html')
     return 'fail'
 
 @app.route('/history')
