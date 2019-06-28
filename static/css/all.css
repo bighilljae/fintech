@@ -1207,24 +1207,26 @@ p {
 
 /*Custom CSS*/
 .list {
-  margin: 20px;
+  margin: 0px;
 }
  
 .list ul {
   list-style-type: none;
   width: 500px;
+  padding-left: 0px;
 }
  
 .list li img {
   width: 50%;
   height: auto;
   float: left;
-  margin: 0 15px 0 0;
+  margin: 0 0px 0 0;
 }
  
 .list li {
-  padding: 10px;
   overflow: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
  
 .list li:hover {
@@ -1247,6 +1249,10 @@ p {
   color: white;
 }
 
+.owner{
+  margin-top: 20px;
+}
+
 .owner h2{
   margin: 0 0 20px;
   font-size: 5.4rem;
@@ -1261,6 +1267,14 @@ p {
 
 .rate h4{
   color: red;
+}
+
+.rate h3{
+  margin: 0px;
+}
+
+.black{
+  color:black;
 }
 
 
