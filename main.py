@@ -81,3 +81,11 @@ def history():
     
     return json.dumps({'li': li, 'xlabel': sorted(history.keys()), 'today': today})
     # f = open('history/{}.csv', )
+
+@app.route('/model_list')
+def model_list():
+    models = open('result/list.txt', 'r')
+    models.readlines()
+    models.close()
+    return ''
+    

@@ -44,7 +44,7 @@ try:
         action = agent.act(state)
         
         #random4 = random.randrange(0,4)
-        print("{} 보유수량: {:2d} 총평가금액: {:.2f} 현재가격: {:.2f}  {}".format(dt[t], stock_cnt, cash + data[t] * stock_cnt, data[t], action))
+        # print("{} 보유수량: {:2d} 총평가금액: {:.2f} 현재가격: {:.2f}  {}".format(dt[t], stock_cnt, cash + data[t] * stock_cnt, data[t], action))
         pp.write("{},{:d},{:.2f},{:.2f},{:.2f}\n".format(dt[t], stock_cnt, cash, cash + data[t] * stock_cnt, data[t]))
 
         # sit
