@@ -37,83 +37,17 @@
 		$(document).ready(() => {
 			data = [20000, 14000, 12000, 15000, 18000, 19000, 22000];
 			labels =  ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
-
-			var speedData = {
-				labels: ["0s", "10s", "20s", "30s", "40s", "50s", "60s"],
-				datasets: [{
-					label: "Car Speed",
-					data: [0, 59, 75, 20, 20, 55, 40],
-					lineTension: 0,
-					fill: false,
-					borderColor: 'orange',
-					backgroundColor: 'transparent',
-					pointBorderColor: 'orange',
-					pointBackgroundColor: 'rgba(255,150,0,0.5)',
-					borderDash: [5, 5],
-					pointRadius: 5,
-					pointHoverRadius: 10,
-					pointHitRadius: 30,
-					pointBorderWidth: 2,
-					pointStyle: 'rectRounded'
-				}]
-			};
-
-			var chartOptions = {
-				legend: {
-					display: true,
-					position: 'top',
-					labels: {
-						boxWidth: 80,
-						fontColor: 'black'
-					}
-				},
-				scales: {
-					xAxes: [{
-					gridLines: {
-						display: false,
-						color: "black"
-					},
-					scaleLabel: {
-						display: true,
-						labelString: "Time in Seconds",
-						fontColor: "red"
-					}
-					}],
-					yAxes: [{
-					gridLines: {
-						color: "black",
-						borderDash: [2, 5],
-					},
-					scaleLabel: {
-						display: true,
-						labelString: "Speed in Miles per Hour",
-						fontColor: "green"
-					}
-					}]
-				}
-			};
-
+			
 			var ctx = document.getElementById("myChart").getContext('2d');
             var myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'This week',
-                        data: speedData,
+                        label: 'Profit',
+                        data: data,
                     }]
-                },
-				options: {
-					layout: {
-						padding: {
-							left: 50,
-							right: 0,
-							top: 0,
-							bottom: 0
-						}
-					},
-					...chartOptions
-				}
+                }
             });
 		});
 	</script>
