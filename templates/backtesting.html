@@ -93,13 +93,11 @@
 	</section>
 	<div class="container col-md-offset-1 col-md-7">
 			<article>
-				<?php
-					if( empty($_GET['id']) == false ) {
-						echo file_get_contents($_GET['id'].".txt");
-					} else {
-						echo "<h2>Choose a model u bitch!</h2>";
-					}
-				?>
+				{% if item1 %}
+					<p>fuckyou</p>
+					<iframe width="800" height="700" src="{{ item1 }}" frameborder="0" style="border:0" allowfullscreen></iframe>
+					<iframe width="800" height="700" src="{{ item2 }}" frameborder="0" style="border:0" allowfullscreen></iframe>
+				{% endif %}
 			</article>
 	</div>
 </div>

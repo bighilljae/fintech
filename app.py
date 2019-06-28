@@ -10,8 +10,11 @@ def index():
 
 @app.route('/backtesting.html')
 def backtest():
+    print(request.args.get('id'))
+    if request.args.get('id') is None:
+        return render_template('backtesting.html')
     id = int(request.args.get('id')) - 1
-    return render_template('backtesting.html', id_list[id])
+    return render_template('backtesting.html', item1=id_list[id]['item1'], item2=id_list[id]['item2'])
 
 if __name__ == '__main__':
     app.run(port=8080)
