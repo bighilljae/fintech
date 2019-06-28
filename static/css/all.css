@@ -67,7 +67,7 @@ p {
     height: auto; }
 
 #header {
-  position: fixed;
+  position: inherit;
   top: 0;
   left: 0;
   width: 100%;
@@ -1236,4 +1236,12 @@ p {
   cursor: pointer;
 }
 
+.chart {
+  width: 50%;
+  height: 50%;
+  margin: auto;
+}
+
 /*Custom CSS*/
+
+

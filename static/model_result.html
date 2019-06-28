@@ -28,7 +28,98 @@
 	<link rel="stylesheet" href="fonts/font-awesome-4.3.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/all.css">
 	<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Source+Sans+Pro:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/jquery.main.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+	<script>
+		$(document).ready(() => {
+			data = [20000, 14000, 12000, 15000, 18000, 19000, 22000];
+			labels =  ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+
+			var speedData = {
+				labels: ["0s", "10s", "20s", "30s", "40s", "50s", "60s"],
+				datasets: [{
+					label: "Car Speed",
+					data: [0, 59, 75, 20, 20, 55, 40],
+					lineTension: 0,
+					fill: false,
+					borderColor: 'orange',
+					backgroundColor: 'transparent',
+					pointBorderColor: 'orange',
+					pointBackgroundColor: 'rgba(255,150,0,0.5)',
+					borderDash: [5, 5],
+					pointRadius: 5,
+					pointHoverRadius: 10,
+					pointHitRadius: 30,
+					pointBorderWidth: 2,
+					pointStyle: 'rectRounded'
+				}]
+			};
+
+			var chartOptions = {
+				legend: {
+					display: true,
+					position: 'top',
+					labels: {
+						boxWidth: 80,
+						fontColor: 'black'
+					}
+				},
+				scales: {
+					xAxes: [{
+					gridLines: {
+						display: false,
+						color: "black"
+					},
+					scaleLabel: {
+						display: true,
+						labelString: "Time in Seconds",
+						fontColor: "red"
+					}
+					}],
+					yAxes: [{
+					gridLines: {
+						color: "black",
+						borderDash: [2, 5],
+					},
+					scaleLabel: {
+						display: true,
+						labelString: "Speed in Miles per Hour",
+						fontColor: "green"
+					}
+					}]
+				}
+			};
+
+			var ctx = document.getElementById("myChart").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'This week',
+                        data: speedData,
+                    }]
+                },
+				options: {
+					layout: {
+						padding: {
+							left: 50,
+							right: 0,
+							top: 0,
+							bottom: 0
+						}
+					},
+					...chartOptions
+				}
+            });
+		});
+	</script>
+	
 </head>
+
 <body>
 <div id="wrapper">
 		<header id="header">
@@ -57,25 +148,20 @@
 				</nav>
 			</div>
         </header>
-        <section class="main">
-                <div class="container">
-                    <div class="row">
-                        <div class="text-box col-md-offset-1 col-md-10">
-                            <h2>Invest</h2>
-                            <h2>Step 2 : Backtesting</h2>
-                        </div>
-                        <div class="text-box col-md-offset-1 col-md-10">           
-                            <iframe width="1100" height="700" src="https://datastudio.google.com/embed/reporting/1BPUO86dh2Kdu5jNIdVepIh-73ACGDkr7/page/jr4s" frameborder="0" style="border:0" allowfullscreen></iframe>
-                            <iframe width="1100" height="700" src="https://datastudio.google.com/embed/reporting/18UA4eqZiruDn02J0mR2cLICn9bZImgQK/page/144s" frameborder="0" style="border:0" allowfullscreen></iframe>
-                            <a href="backtesting2.html" class="btn btn-primary rounded">Commit 시작</a>
-                        </div>
-                    </div>
+        <section class="main">	
+            <div class="container">
+                <div class="row">
+                    <div class="text-box col-md-offset-1 col-md-10">
+                        <h2>Invest</h2>
+                        <h2>Step 2 : Backtesting</h2>
+					</div>
                 </div>
+			</div>
+			<div class="chart">
+				<canvas id="myChart"></canvas>
+			</div>
         </section>
 </div>
 
-<script src="js/jquery-1.11.2.min.js"></script>
-<script src="js/bootstrap.js"></script>
-<script src="js/jquery.main.js"></script>
 </body>
 </html>
