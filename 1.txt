@@ -1,2 +1,0 @@
-<iframe width="800" height="700" src="https://datastudio.google.com/embed/reporting/1BPUO86dh2Kdu5jNIdVepIh-73ACGDkr7/page/jr4s" frameborder="0" style="border:0" allowfullscreen></iframe>
-<iframe width="800" height="700" src="https://datastudio.google.com/embed/reporting/18UA4eqZiruDn02J0mR2cLICn9bZImgQK/page/144s" frameborder="0" style="border:0" allowfullscreen></iframe>
