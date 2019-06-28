@@ -168,7 +168,7 @@ p {
   transform: rotate(-45deg); }
 
 .visual {
-  min-height: 904px;
+  min-height: 800px;
   position: relative;
   overflow: hidden;
   text-align: center;
@@ -176,8 +176,7 @@ p {
   font-size: 0;
   letter-spacing: -4px;
   padding: 104px 0 0;
-  background-image: url('../images/img-decor-01.jpg');
-}
+  background: #000; }
   .visual .bg-stretch {
     position: absolute;
     bottom: 0;
@@ -211,7 +210,7 @@ p {
     color: #494654;
     text-transform: uppercase; }
   .visual .text-block {
-    padding: 90px 0; }
+    padding:0; }
 
 #cta {
   position: relative;
@@ -274,8 +273,7 @@ p {
   font-size: 2.1rem;
   line-height: 1.524;
   color: #716E79;
-  padding-bottom: 23px; 
-	letter-spacing: 10px; }
+  padding-bottom: 23px; }
   .text-box h2 {
     margin: 0 0 20px;
     font-size: 5.4rem;
@@ -335,6 +333,7 @@ p {
       position: relative;
       top: 0;
       left: -20px; }
+
 
 /* See Blueprint http://tympanus.net/codrops/2013/07/18/on-scroll-effect-layout/ */
 .scroll-effect-init .img-slide {
@@ -1068,8 +1067,6 @@ p {
       bottom: 20px; }
     .visual .info {
       background: rgba(255, 255, 255, 0.3);
-      width: 900px;
-      height: 400px;
       color: #BEBCC3; }
 
   .visual h1 {
@@ -1240,6 +1237,15 @@ p {
   width: 50%;
   height: 50%;
   margin: auto;
+}
+
+.holding {
+  width: 400px;
+  height: 300px;
+}
+
+.white{
+  color: white;
 }
 
 /*Custom CSS*/
