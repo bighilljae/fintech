@@ -210,7 +210,7 @@ p {
     color: #494654;
     text-transform: uppercase; }
   .visual .text-block {
-    padding:0; }
+    padding:70px 0 0; }
 
 #cta {
   position: relative;
@@ -1208,7 +1208,6 @@ p {
 /*Custom CSS*/
 .list {
   margin: 20px;
-
 }
  
 .list ul {
@@ -1247,6 +1246,23 @@ p {
 .white{
   color: white;
 }
+
+.owner h2{
+  margin: 0 0 20px;
+  font-size: 5.4rem;
+  line-height: 1.148;
+  text-transform: uppercase;
+  font-weight: bold; 
+  color: black;}
+
+  .owner h4 p{
+    color: black;
+  }
+
+.rate h4{
+  color: red;
+}
+
 
 /*Custom CSS*/
 
