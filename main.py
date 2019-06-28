@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, redirect
+import math
 import pickle
 import os.path
 import sys
@@ -84,8 +85,26 @@ def history():
 
 @app.route('/model_list')
 def model_list():
-    models = open('result/list.txt', 'r')
-    models.readlines()
-    models.close()
-    return ''
-    
+    f = open('result/list.txt', 'r')
+    models = f.readlines()
+    res = []
+    for model in models:
+        pi = open('result/{}.pickle'.format(model.strip()), 'rb')
+        history = pickle.load(pi)
+        pi.close()
+        dates = sorted(history.keys())
+        last_pf = 0
+        for c in history[dates[-1]]:
+            last_pf += float(history[dates[-1]][c][2])
+        first_pf = 0
+        for c in history[dates[0]]:
+            first_pf += float(history[dates[0]][c][2])
+        import datetime
+        ee = datetime.datetime.strptime(dates[-1], '%Y-%m-%d')
+        ss = datetime.datetime.strptime(dates[0], '%Y-%m-%d')
+        yy = (ee - ss).days / 365
+        rate = math.log(last_pf / first_pf) / yy * 10000
+        res.append({'name': model, 'rate': round(rate)/100 })
+    f.close()
+    res.sort(key=lambda item: item['rate'], reverse=True)
+    return render_template('user_model_list.html', model_list=res )
