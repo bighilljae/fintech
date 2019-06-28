@@ -4,6 +4,6 @@ app.py
 *.DS_Store
 result/
 temp/
-images/
+/images/
 data/
 models/
