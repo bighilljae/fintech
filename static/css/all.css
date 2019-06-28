@@ -176,7 +176,8 @@ p {
   font-size: 0;
   letter-spacing: -4px;
   padding: 104px 0 0;
-  background: #000; }
+  background-image: url('../images/img-decor-01.jpg');
+}
   .visual .bg-stretch {
     position: absolute;
     bottom: 0;
@@ -273,7 +274,8 @@ p {
   font-size: 2.1rem;
   line-height: 1.524;
   color: #716E79;
-  padding-bottom: 23px; }
+  padding-bottom: 23px; 
+	letter-spacing: 10px; }
   .text-box h2 {
     margin: 0 0 20px;
     font-size: 5.4rem;
@@ -1066,6 +1068,8 @@ p {
       bottom: 20px; }
     .visual .info {
       background: rgba(255, 255, 255, 0.3);
+      width: 900px;
+      height: 400px;
       color: #BEBCC3; }
 
   .visual h1 {
