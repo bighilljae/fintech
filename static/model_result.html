@@ -35,20 +35,78 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 	<script>
 		$(document).ready(() => {
-			data = [20000, 14000, 12000, 15000, 18000, 19000, 22000];
-			labels =  ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
-			
-			var ctx = document.getElementById("myChart").getContext('2d');
-            var myChart = new Chart(ctx, {
+			// balance chart(line chart) data
+			data = [20000, 14000, 12000, 15000, 18000, 19000, 22000];	// red
+			data2 = [18000, 19000, 22000, 20000, 14000, 12000, 15000];	// blue
+
+/*
+			data = []
+			data2 = []
+			line_labels = []
+			for (var i=0; i<1000; ++i) {
+				let a = Math.random()*1000 + 10000;
+				data = data.concat([a]);
+				let b = Math.random()*1000 + 10000;
+				data2 = data2.concat([b]);
+				let c = Math.random()*1000 + 10000;
+				balance_labels = line_labels.concat([c]);
+			}
+*/
+			// balance chart(line chart) label
+			balance_labels =  ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];			
+			// pie chart label
+			portfolio_labels = ["삼성전기", "SK하이닉스", "LG", "정호용", "멍청이"]
+			// transaction chart label
+			transaction_lables = ['']
+
+			var balanceId = document.getElementById("balanceChart").getContext('2d');
+            var balanceChart = new Chart(balanceId, {
                 type: 'line',
                 data: {
-                    labels: labels,
+                    labels: balance_labels,
                     datasets: [{
-                        label: 'Profit',
-                        data: data,
-                    }]
-                }
-            });
+						label: 'Profit(proposed model)',
+						fill: false,
+						data: data,
+						lineTension: 0,
+						borderColor: 'red',
+                    }, {
+						label: 'data',
+						fill: false,
+						data: data2,
+						lineTension: 0,
+						borderColor: 'blue'
+					}]
+				},
+				options:{
+					scales: {
+						yAxes : [{
+							ticks : {
+								min : 0,
+								max : 50000,
+							},
+						}],
+					},
+					elements: {
+						point:{
+							radius: 0
+						},
+                	},
+				},
+			});
+			
+			var portfolioId = document.getElementById("portfolioChart").getContext('2d');
+			var portfolioChart = new Chart(portfolioId, {
+                type: 'pie',
+                data: {
+                    labels: portfolio_labels,
+                    datasets: [{
+						data: data,
+						borderColor: 'green',
+					}]
+				},
+			});
+			var 
 		});
 	</script>
 	
@@ -86,13 +144,15 @@
             <div class="container">
                 <div class="row">
                     <div class="text-box col-md-offset-1 col-md-10">
-                        <h2>Invest</h2>
-                        <h2>Step 2 : Backtesting</h2>
+						<h2>Step 2 :</h2>
+						<h2>Backtesting Result</h2>
 					</div>
                 </div>
 			</div>
 			<div class="chart">
-				<canvas id="myChart"></canvas>
+				<canvas id="balanceChart"></canvas>
+				<canvas id="portfolioChart"></canvas>
+				<canvas id=""></canvas>
 			</div>
         </section>
 </div>
