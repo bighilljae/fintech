@@ -62,58 +62,23 @@
 						<h5>모델 랭킹</h5>
 						<div class="list">
 							<ul>
+								{% for model in model_list %}
 								<li>
+									<!-- 아직 안됨 -->
 									<a href="user_model_list.html?id=1">
 									<span class="rate">
-										<h4><span class="black">4차산업혁명</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<i class="fa fa-caret-up"></i> 2.05&#37;</h4>
+										<h4><span class="black">{{ model.name }}</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<i class="fa fa-caret-up"></i> {{ model.rate}}&#37;</h4>
 										<p>IT를 중심으로 한 산업 재편</p>
 									</span>
 									</a>
 								</li>	
-								<li>
-									<a href="user_model_list.html?id=2">
-									<span class="rate">
-										<h4><span class="black">중소형주 AI</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<i class="fa fa-caret-up"></i> 7.79&#37;</h4>
-										<p>새로운 성장동력 강소 기업에 투자</p>
-									</span>
-									</a>
-								</li>
-								<li>
-									<a href="user_model_list.html?id=2">
-									<span class="rate">
-										<h4><span class="black">중소형주 AI</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<i class="fa fa-caret-up"></i> 7.79&#37;</h4>
-										<p>새로운 성장동력 강소 기업에 투자</p>
-									</span>
-									</a>
-								</li>
-								<li>
-									<a href="user_model_list.html?id=2">
-									<span class="rate">
-										<h4><span class="black">중소형주 AI</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<i class="fa fa-caret-up"></i> 7.79&#37;</h4>
-										<p>새로운 성장동력 강소 기업에 투자</p>
-									</span>
-									</a>
-								</li>
-								<li>
-									<a href="user_model_list.html?id=2">
-									<span class="rate">
-										<h4><span class="black">중소형주 AI</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<i class="fa fa-caret-up"></i> 7.79&#37;</h4>
-										<p>새로운 성장동력 강소 기업에 투자</p>
-									</span>
-									</a>
-								</li>
+								{% endfor %}
 							</ul>
 						</div>
 					</div>
 		</div>
 	</section>
 	<div class="container col-md-offset-1 col-md-7">
-			<article>
-				{% if item1 %}
-					<iframe width="800" height="700" src="{{ item1 }}" frameborder="0" style="border:0" allowfullscreen></iframe>
-					<iframe width="800" height="700" src="{{ item2 }}" frameborder="0" style="border:0" allowfullscreen></iframe>
-				{% endif %}
-			</article>
 	</div>
 </div>
 
