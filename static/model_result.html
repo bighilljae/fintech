@@ -39,25 +39,10 @@
 			data = [20000, 14000, 12000, 15000, 18000, 19000, 22000];	// red
 			data2 = [18000, 19000, 22000, 20000, 14000, 12000, 15000];	// blue
 
-/*
-			data = []
-			data2 = []
-			line_labels = []
-			for (var i=0; i<1000; ++i) {
-				let a = Math.random()*1000 + 10000;
-				data = data.concat([a]);
-				let b = Math.random()*1000 + 10000;
-				data2 = data2.concat([b]);
-				let c = Math.random()*1000 + 10000;
-				balance_labels = line_labels.concat([c]);
-			}
-*/
 			// balance chart(line chart) label
 			balance_labels =  ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];			
 			// pie chart label
 			portfolio_labels = ["삼성전기", "SK하이닉스", "LG", "정호용", "멍청이"]
-			// transaction chart label
-			transaction_lables = ['']
 
 			var balanceId = document.getElementById("balanceChart").getContext('2d');
             var balanceChart = new Chart(balanceId, {
@@ -70,13 +55,13 @@
 						data: data,
 						lineTension: 0,
 						borderColor: 'red',
-                    }, {
+                    }/*, {
 						label: 'data',
 						fill: false,
 						data: data2,
 						lineTension: 0,
 						borderColor: 'blue'
-					}]
+					}*/]
 				},
 				options:{
 					scales: {
@@ -105,8 +90,7 @@
 						borderColor: 'green',
 					}]
 				},
-			});
-			var 
+            });
 		});
 	</script>
 	
@@ -126,7 +110,7 @@
 						<ul>
 							<li><a href="index.html">About Stock Plantation</a></li>
 							<li><a href="doc.html">API Documentation</a></li>
-							<li><a href="backtesting.html">Upload Model</a></li>
+							<li><a href="backtesting.html?id=1">Backtesting & Commit</a></li>
 						</ul>
 						<div class="drop-holder visible-sm visible-xs">
 							<span>Follow Us</span>
