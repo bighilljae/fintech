@@ -17,4 +17,4 @@ def backtest():
     return render_template('backtesting.html', item1=id_list[id]['item1'], item2=id_list[id]['item2'])
 
 if __name__ == '__main__':
-    app.run(port=8080)
+    app.run(port=8080, debug=True)
