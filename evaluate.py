@@ -45,7 +45,7 @@ try:
         
         #random4 = random.randrange(0,4)
         print("{} 보유수량: {:2d} 총평가금액: {:.2f} 현재가격: {:.2f}  {}".format(dt[t], stock_cnt, cash + data[t] * stock_cnt, data[t], action))
-        pp.write("{},{:d},{:.2f},{:.2f}\n".format(dt[t], stock_cnt, cash + data[t] * stock_cnt, data[t]))
+        pp.write("{},{:d},{:.2f},{:.2f},{:.2f}\n".format(dt[t], stock_cnt, cash, cash + data[t] * stock_cnt, data[t]))
 
         # sit
         next_state = getState(data, t + 1, window_size + 1)
@@ -66,7 +66,7 @@ try:
             #print ("Sell: " + formatPrice(data[t]) + " | Profit: " + formatPrice(profit))
             stock_cnt -= 1
             cash += data[t]
-
+        '''
         if action == 0: # sit
             sit_cnt+=1
             sell_cnt = 0
@@ -84,7 +84,7 @@ try:
             sit_cnt = 0
             buy_cnt = 0
             reward -= sell_cnt
-
+        '''
         reward += cash+data[t]*stock_cnt - init_cash
 
 

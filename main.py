@@ -2,6 +2,7 @@ from flask import Flask, request, render_template
 import pickle
 import os.path
 import sys
+import json
 
 app = Flask(__name__, static_folder='static/', static_url_path='')
 
@@ -32,10 +33,11 @@ def upload():
             csv = open('temp/res_{}.csv'.format(c), 'r')
             lines = csv.readlines()
             for line in lines:
-                dt, ct, pd, cp = line.split(',')
+                # date, count, cash, portfolio ,current price
+                dt, ct, ch, pd, cp = line.strip().split(',')
                 if not dt in history:
                     history[dt] = {}
-                history[dt][c] = [ct, pd, cp]
+                history[dt][c] = [ct, ch, pd, cp]
             csv.close()
         pi = open('result/{}.pickle'.format(f.filename), 'wb')
         pickle.dump(history, pi, protocol=pickle.HIGHEST_PROTOCOL)
@@ -45,6 +47,30 @@ def upload():
 
 @app.route('/history')
 def history():
-    id = request.args.get('id')
-    return ''
+    mdl = request.args.get('model')
+    pi = open('result/{}.pickle'.format(mdl), 'rb')
+    history = pickle.load(pi)
+    pi.close()
+    pf = {}
+    cc = ['005930', '000660', '005380', '068270', '051910', '012330', '055550', '005490', '051900', '017670']
+    for c in cc:
+        pf[c] = {}
+    li = []
+    for d in sorted(history.keys()): # date
+        for c in history[d]: # code
+            pf[c]['cnt'] = history[d][c][0]
+            pf[c]['cash'] = history[d][c][1]
+            pf[c]['pf'] = history[d][c][2]
+        daily_pf = 0
+        for c in pf:
+            daily_pf += float(pf[c]['pf'])
+        li.append(daily_pf)
+    
+    today = {}
+    cash = 0
+    for c in pf:
+        cash += float(pf[c]['cash'])
+        today[c] = float(pf[c]['pf']) - float(pf[c]['cash'])
+    today['cash'] = cash
+    return json.dumps(today)
     # f = open('history/{}.csv', )
