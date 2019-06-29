@@ -23,11 +23,25 @@ def backtest():
     id = int(request.args.get('id')) - 1
     return render_template('user_model_list.html', item1=id_list[id]['item1'], item2=id_list[id]['item2'])
 
+def load_KPI200(name):
+    try:
+        csv = open('data/KPI200.csv', 'r')
+        lines = csv.readlines()
+        for line in lines:
+            dt, ct, ch, pd, cp = line.strip().split(',')
+            KPI200.append(float(cp))
+        csv.close()
+    except:
+        os.system('python evaluate.py {} {}'.format('KPI200', name))
+        load_KPI200(name)
+
 @app.route('/model', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
         f = request.files['file']
         f.save('models/' + f.filename)
+
+
         # produce history
         history = {}
         for c in cc:
@@ -53,6 +67,9 @@ def upload():
 
 @app.route('/history')
 def history():
+    import functions
+    KPI200, t = functions.getStockDataVec('KPI200')
+
     mdl = request.args.get('model')
     pi = open('result/{}.pickle'.format(mdl), 'rb')
     history = pickle.load(pi)
@@ -116,7 +133,7 @@ def history():
     today.append(cash)
     #today['cash'] = cash
     
-    return json.dumps({'li': li, 'xlabel': sorted(history.keys()), 'today': today, 'transaction': transaction})
+    return json.dumps({'li': li, 'KPI200': KPI200, 'xlabel': sorted(history.keys()), 'today': today, 'transaction': transaction})
     # f = open('history/{}.csv', )
 
 @app.route('/model_list')

@@ -63,13 +63,14 @@
 							lineTension: 0,
 							borderColor: 'red',
 							borderWidth: 1
-						}/*, {
-							label: 'data',
+						}, {
+							label: 'KPI200',
 							fill: false,
-							data: data2,
+							data: r.KPI200.map(el => el/r.KPI200[0]*100),
 							lineTension: 0,
-							borderColor: 'blue'
-						}*/]
+							borderColor: 'blue',
+							borderWidth: 1
+						}]
 					},
 					options:{
 						scales: {
@@ -122,12 +123,12 @@
 					<div class="opener-holder">
 						<a href="#" class="nav-opener"><span></span></a>
 					</div>
-					<a href="investor.html" class="btn btn-primary rounded">투자자/개발자</a>
+					<a href="http://tympanus.net/codrops/?p=23525" class="btn btn-primary rounded">투자자/개발자</a>
 					<div class="nav-drop">
 						<ul>
 							<li><a href="index.html">About Stock Plantation</a></li>
-							<li><a href="doc.html">Data Description</a></li>
-							<li><a href="backtesting.html">Backtesting & Commit</a></li>
+							<li><a href="doc.html">API Documentation</a></li>
+							<li><a href="backtesting.html?id=1">Backtesting & Commit</a></li>
 						</ul>
 						<div class="drop-holder visible-sm visible-xs">
 							<span>Follow Us</span>
@@ -166,7 +167,7 @@
 					<table>
 						<thead>
 						    <tr>
-								<th>날짜</th><th>종목</th><th>가격</th><th>손익</th>
+								<th>날짜</th><th>종목</th><th>가격</th><th>실현손익</th>
 						    </tr>
 						</thead>
 						<tbody>
