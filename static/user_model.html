@@ -28,7 +28,6 @@
 	<link rel="stylesheet" href="fonts/font-awesome-4.3.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/all.css">
 	<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Source+Sans+Pro:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script src="js/jquery.main.js"></script>
@@ -120,32 +119,30 @@
 	</script>
 	<style>
 		table {
-		  width: 100%;
-		  border-top: 1px solid #444444;
-		  border-collapse: collapse;
+		    width: 100%;
+		    border-top: 1px solid #444444;
+		    border-collapse: collapse;
 		}
 		th, td {
-		  border-bottom: 1px solid #444444;
-		  padding: 10px;
+		    border-bottom: 1px solid #444444;
+		    padding: 10px;
 		}
-	  </style>
+	</style>
 </head>
-
 <body>
 <div id="wrapper">
 		<header id="header">
 			<div class="container">
-				<div class="logo"><a href="index.html"><img src="images/logo4.jpg" alt="FORKIO"></a></div>
+				<div class="logo"><a href="index.html"><img src="images/logo4.jpg" style="max-width:100%"></a></div>
 				<nav id="nav">
 					<div class="opener-holder">
 						<a href="#" class="nav-opener"><span></span></a>
 					</div>
-					<a href="investor.html" class="btn btn-primary rounded">투자자/개발자</a>
+					<a href="index.html" class="btn btn-primary rounded">투자자/개발자</a>
 					<div class="nav-drop">
 						<ul>
-							<li><a href="index.html">About Stock Plantation</a></li>
-							<li><a href="doc.html">API Documentation</a></li>
-							<li><a href="backtesting.html?id=1">Backtesting & Commit</a></li>
+							<li><a href="investor.html">Portfolio</a></li>
+							<li><a href="user_model_list.html">Models</a></li>
 						</ul>
 						<div class="drop-holder visible-sm visible-xs">
 							<span>Follow Us</span>
@@ -159,12 +156,11 @@
 				</nav>
 			</div>
         </header>
-        <section class="main">	
+        <section class="main">
             <div class="container">
-                <div class="row">
+				<div class="row">
                     <div class="text-box col-md-offset-1 col-md-10">
-						<h2>Step 2 :</h2>
-						<h2>Backtesting Result</h2>
+						<h2>Model abstraction</h2>
 					</div>
                 </div>
 			</div>
@@ -190,14 +186,10 @@
 					</table>
 				</div>
 			</div>
-			<div class="text-box col-md-offset-1 col-md-10" style="padding-top: 40px">
-				<h3>Risk Factor</h3>
-				<h4>샤프 비율: 2.17&emsp;&emsp;&emsp;&emsp;위험도: 5.23</h4>
-				<div style="padding-top: 40px; padding-bottom: 20px">
-					<a href="backtesting2.html" class="btn btn-primary rounded">Commit 시작</a>
-				</div>
         </section>
 </div>
-
+<script src="js/jquery-1.11.2.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/jquery.main.js"></script>
 </body>
 </html>

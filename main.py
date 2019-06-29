@@ -24,18 +24,6 @@ def backtest():
     id = int(request.args.get('id')) - 1
     return render_template('user_model_list.html', item1=id_list[id]['item1'], item2=id_list[id]['item2'])
 
-def load_KPI200(name):
-    try:
-        csv = open('data/KPI200.csv', 'r')
-        lines = csv.readlines()
-        for line in lines:
-            dt, ct, ch, pd, cp = line.strip().split(',')
-            KPI200.append(float(cp))
-        csv.close()
-    except:
-        os.system('python evaluate.py {} {}'.format('KPI200', name))
-        load_KPI200(name)
-
 @app.route('/model', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
@@ -45,6 +33,7 @@ def upload():
 
         # produce history
         history = {}
+        history['description'] = request.form['description']
         for c in cc:
             os.system('python evaluate.py {} {}'.format(c, f.filename))
             csv = open('temp/res_{}.csv'.format(c), 'r')
@@ -69,12 +58,13 @@ def upload():
 @app.route('/history')
 def history():
     import functions
-    KPI200, t = functions.getStockDataVec('KPI200')
-    KOSPI, t = functions.getStockDataVec('KOSPI')
+    KPI200, t1 = functions.getStockDataVec('KPI200')
+    KOSPI, t2 = functions.getStockDataVec('KOSPI')
 
     mdl = request.args.get('model')
     pi = open('result/{}.pickle'.format(mdl), 'rb')
     history = pickle.load(pi)
+    del history['description']
     pi.close()
     pf = {}
     scale = {
@@ -170,6 +160,8 @@ def model_list():
     for model in models:
         pi = open('result/{}.pickle'.format(model.strip()), 'rb')
         history = pickle.load(pi)
+        desc = history['description']
+        del history['description']
         pi.close()
 
         dates = sorted(history.keys())
@@ -185,7 +177,7 @@ def model_list():
         ss = datetime.datetime.strptime(dates[0], '%Y-%m-%d')
         yy = (ee - ss).days / 365
         rate = math.log(last_pf / first_pf) / yy * 10000
-        res.append({'name': model, 'rate': round(rate) / 100})
+        res.append({'name': model, 'rate': round(rate) / 100, 'description': desc})
     f.close()
     res.sort(key=lambda item: item['rate'], reverse=True)
     return render_template('user_model_list.html', model_list=res)

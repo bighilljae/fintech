@@ -60,15 +60,19 @@
         <section class="main">
                 <div class="container">
                     <div class="row">
-                        <div class="text-box col-md-offset-1 col-md-10">
-                            <h2>Invest</h2>
+                        <div class="text-box col-md-offset-1 col-md-10">	
                             <h2>Step 3 : Commit</h2>
                         </div>
                         <div class="text-box col-md-offset-1 col-md-10">
-                            Commit 하는 단계.
-                            Fill in 모델 설명.
-                            <div>Put in some of your own money.</div>          
-                            <a href="backtesting3.html" class="btn btn-primary rounded">Commit</a>
+							<form action="/model" method="POST" enctype="multipart/form-data">
+								<div>
+									<p>모델을 한마디로 설명해주세요</p><textarea name="description" rows="2" cols="40"></textarea>
+								</div>
+								<div style="padding-top: 30px; padding-bottom: 30px">
+									<p>본인이 투자할 금액을 기입해주세요</p><input type="TEXT" name="description" size="20">원
+								</div>
+								<input type="submit"/>
+							</form>
                         </div>
                     </div>
                 </div>
