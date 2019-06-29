@@ -12,6 +12,7 @@ id_list = [{'item1': 'https://datastudio.google.com/embed/reporting/1BPUO86dh2Kd
             'item2': 'https://datastudio.google.com/embed/reporting/18UA4eqZiruDn02J0mR2cLICn9bZImgQK/page/144s'}]
 #     삼성전자,    현대차,    POSCO,    현대모비스,  LG화학,    한국전력,   SK하이닉스, 신한지주, NAVER, KB
 cc = ['005930', '005380', '005490', '012330', '051910', '015760', '000660', '055550', '035420', '105560']
+invest = [{'name': 'KOSPI200', 'current': 6960095, 'diff': 455432}, {'name': '운수장비 섹터','current': 5182538, 'diff': 170345}]
 
 @app.route('/')
 def index():
@@ -23,6 +24,13 @@ def backtest():
         return render_template('user_model_list.html')
     id = int(request.args.get('id')) - 1
     return render_template('user_model_list.html', item1=id_list[id]['item1'], item2=id_list[id]['item2'])
+
+@app.route('/investor', methods=['GET', 'POST'])
+def investor():
+    if request.method == 'POST':
+        # model. invest
+        invest.append({'name': request.form['model'], 'current': int(request.form['invest']), 'diff': 0})
+    return render_template('investor.html', invest=invest)
 
 @app.route('/model', methods=['GET', 'POST'])
 def upload():

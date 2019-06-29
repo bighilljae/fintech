@@ -41,7 +41,7 @@
 					<a href="index.html" class="btn btn-primary rounded">투자자/개발자</a>
 					<div class="nav-drop">
 						<ul>
-							<li><a href="investor.html">Portfolio</a></li>
+							<li><a href="investor">Portfolio</a></li>
 							<li><a href="/model_list">Models</a></li>
 						</ul>
 						<div class="drop-holder visible-sm visible-xs">
@@ -61,31 +61,25 @@
                     <div class="row invest">
                         <div class="col-md-offset-1 col-md-10 owner">
                             <h5>현재 투자 금액</h5>
-                            <h2>12,142,633원</h2>
+                            <h2>{{ invest | sum(attribute='current') }}원</h2>
                             <div class="rate">
-                                <h4><i class="fa fa-caret-up"></i> 5.35&#37;&nbsp;&nbsp;625,777원</h4>
+                                <h4><i class="fa fa-caret-up"></i> {{ ((invest | sum(attribute='diff'))/(invest | sum(attribute='current'))) | round(3) }}&#37;&nbsp;&nbsp;{{ invest | sum(attribute='diff')}}원</h4>
                             </div>
                         </div>
                         <div class="col-md-offset-1 col-md-10 owner">
                             <h5>현재 투자중인 모델</h5>
                             <div class="list">
                                     <ul>
+										{% for item in invest %}
                                         <li>
                                             <a href="user_model.html?model=model_ep980">
                                                 <span class="rate">
-                                                    <h3>KOSPI200</h3>
-                                                    <h4><span class="black">6,960,095원</span>&emsp;&emsp;&emsp;&emsp;<i class="fa fa-caret-up"></i> 7.3&#37;&nbsp;&nbsp;455,432원</h4>
+                                                    <h3>{{ item.name }}</h3>
+                                                    <h4><span class="black">{{ item.current }}원</span>&emsp;&emsp;&emsp;&emsp;<i class="fa fa-caret-up"></i> {{ (item.diff / item.current)|round(2) }}&#37;&nbsp;&nbsp;{{item.diff}}원</h4>
                                                 </span>
                                             </a>
-                                        </li>	
-                                        <li>
-                                            <a href="user_model_list.html?id=2">	<!--여기 이름-->
-                                                <span class="rate">
-                                                    <h3>S&P500</h3>
-                                                    <h4><span class="black">5,182,538원</span>&emsp;&emsp;&emsp;&emsp;<i class="fa fa-caret-up"></i> 3.39&#37;&nbsp;&nbsp;170,345원</h4>
-                                                </span>
-                                            </a>
-                                        </li>
+										</li>	
+										{% endfor %}
                                     </ul>
                             </div>
                         </div>
