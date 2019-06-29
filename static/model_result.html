@@ -110,7 +110,17 @@
 			
 		});
 	</script>
-	
+	<style>
+		table {
+		  width: 100%;
+		  border-top: 1px solid #444444;
+		  border-collapse: collapse;
+		}
+		th, td {
+		  border-bottom: 1px solid #444444;
+		  padding: 10px;
+		}
+	  </style>
 </head>
 
 <body>
@@ -166,7 +176,7 @@
 					<table>
 						<thead>
 						    <tr>
-								<th>날짜</th><th>종목</th><th>가격</th><th>손익</th>
+								<th>날짜</th><th>종목</th><th>가격</th><th>실현손익</th>
 						    </tr>
 						</thead>
 						<tbody>
@@ -174,7 +184,10 @@
 					</table>
 				</div>
 			</div>
-        </section>
+			<div class="text-box">
+				<a href="backtesting2.html" class="btn btn-primary rounded">Commit 시작</a>
+			</div>
+        </section>t
 </div>
 
 </body>
