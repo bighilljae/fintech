@@ -58,24 +58,24 @@
         </header>
 	<section class="main">
 		<div class="container">
-				<div class="col-md-offset-1 col-md-10 owner">
-						<h5>모델 랭킹</h5>
-						<div class="list">
-							<ul>
-								{% for model in model_list %}
-								<li>
-									<!-- 아직 안됨 -->
-									<a href="user_model_list.html?id=1">
-									<span class="rate">
-										<h4><span class="black">{{ model.name }}</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<i class="fa fa-caret-up"></i> {{ model.rate}}&#37;</h4>
-										<p>{{ model.description }}</p>
-									</span>
-									</a>
-								</li>	
-								{% endfor %}
-							</ul>
-						</div>
-					</div>
+			<div class="col-md-offset-1 col-md-10 owner">
+				<h5>모델 랭킹</h5>
+				<div class="list">
+					<ul>
+						{% for model in model_list %}
+						<li>
+							<!-- 아직 안됨 -->
+							<a id="model_name" href="user_model.html?model={{ model.name }}">
+							<span class="rate">
+								<h4><span class="black">{{ model.name }}</span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<i class="fa fa-caret-up"></i> {{ model.rate}}&#37;</h4>
+								<p>{{ model.description }}</p>
+							</span>
+							</a>
+						</li>	
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
 		</div>
 	</section>
 	<div class="container col-md-offset-1 col-md-7">
