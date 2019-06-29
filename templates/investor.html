@@ -72,7 +72,7 @@
                                     <ul>
 										{% for item in invest %}
                                         <li>
-                                            <a href="user_model.html?model=model_ep980">
+                                            <a href="user_model.html?model={{ item.name }}">
                                                 <span class="rate">
                                                     <h3>{{ item.name }}</h3>
                                                     <h4><span class="black">{{ item.current }}원</span>&emsp;&emsp;&emsp;&emsp;<i class="fa fa-caret-up"></i> {{ (item.diff / item.current)|round(2) }}&#37;&nbsp;&nbsp;{{item.diff}}원</h4>
