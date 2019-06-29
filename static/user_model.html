@@ -33,6 +33,7 @@
 	<script src="js/jquery.main.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 	<script>
+		document.getElementById('model_name').innerHTML = model.name
 		$(document).ready(() => {
 			// balance chart(line chart) data
 			// data = [20000, 14000, 12000, 15000, 18000, 19000, 22000];	// red
@@ -160,8 +161,7 @@
             <div class="container">
 				<div class="row">
                     <div class="text-box col-md-offset-1 col-md-10">
-						<h2>Backtesting result</h2>
-						<h4>연 수익율: <i class="fa fa-caret-up"></i> 3.3&#37;</h4>
+						<h2 id='model_name'>KOSPI200</h2>
 					</div>
                 </div>
 			</div>
