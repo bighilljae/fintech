@@ -1278,11 +1278,17 @@ p {
 }
 
 .scrolltable {
-  width: 100%;
-  height: 800px;
-  overflow: scroll;
+  width: 70%;
+  height: 500px;
+  overflow-y: scroll;
+  margin: auto
 }
 
+.chartMobile {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
 
 /*Custom CSS*/
 
