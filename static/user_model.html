@@ -38,6 +38,7 @@
 			model = url.searchParams.get("model");
 			var data, portfolio;
 			$('#model_input').val(model);
+			$('#model_name').text(model);
 			jQuery.get('/history', {model: model}, (res)=>{
 				r = JSON.parse(res);
 				data = r.li.map( el => (el/400) );
@@ -158,7 +159,7 @@
             <div class="container">
 				<div class="row">
                     <div class="text-box col-md-offset-1 col-md-10">
-						<h2 id='model_name'>KOSPI200</h2>
+						<h2 id='model_name'></h2>
 					</div>
                 </div>
 			</div>
