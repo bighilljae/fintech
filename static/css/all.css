@@ -341,9 +341,9 @@ p {
   transition: transform 1s; }
 
 .scroll-effect-init .img-slide {
-  -webkit-transform: translateX(50px);
-  -moz-transform: translateX(50px);
-  transform: translateX(50px); }
+  -webkit-transform: translateX(0px);
+  -moz-transform: translateX(0px);
+  transform: translateX(0px); }
 
 .slide-holder.scroll-effect-animate .img-slide {
   -webkit-transform: translateX(0px);
@@ -1241,7 +1241,7 @@ p {
 }
 
 .holding {
-  width: 400px;
+  width: 520px;
   height: 300px;
 }
 
