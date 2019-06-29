@@ -33,7 +33,7 @@
 <div id="wrapper">
 		<header id="header">
 			<div class="container">
-				<div class="logo"><a href="index.html"><img src="images/logo4.jpg" style="max-width:100%"></a></div>
+				<div class="logo"><a href="index.html"><img src="images/logo.png" style="max-width:150%"></a></div>
 				<nav id="nav">
 					<div class="opener-holder">
 						<a href="#" class="nav-opener"><span></span></a>
@@ -63,7 +63,7 @@
                             <h5>현재 투자 금액</h5>
                             <h2>{{ invest | sum(attribute='current') }}원</h2>
                             <div class="rate">
-                                <h4><i class="fa fa-caret-up"></i> {{ ((invest | sum(attribute='diff'))/(invest | sum(attribute='current'))) | round(3) }}&#37;&nbsp;&nbsp;{{ invest | sum(attribute='diff')}}원</h4>
+                                <h4><i class="fa fa-caret-up"></i> {{ ((invest | sum(attribute='diff'))*100/(invest | sum(attribute='current'))) | round(3) }}&#37;&nbsp;&nbsp;{{invest | sum(attribute='diff')}}원</h4>
                             </div>
                         </div>
                         <div class="col-md-offset-1 col-md-10 owner">
@@ -75,7 +75,7 @@
                                             <a href="user_model.html?model={{ item.name }}">
                                                 <span class="rate">
                                                     <h3>{{ item.name }}</h3>
-                                                    <h4><span class="black">{{ item.current }}원</span>&emsp;&emsp;&emsp;&emsp;<i class="fa fa-caret-up"></i> {{ (item.diff / item.current)|round(2) }}&#37;&nbsp;&nbsp;{{item.diff}}원</h4>
+                                                    <h4><span class="black">{{ item.current }}원</span>&emsp;&emsp;&emsp;&emsp;<i class="fa fa-caret-up"></i> {{ (item.diff *100/ item.current)|round(2) }}&#37;&nbsp;&nbsp;{{item.diff}}원</h4>
                                                 </span>
                                             </a>
 										</li>	
