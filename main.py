@@ -23,11 +23,25 @@ def backtest():
     id = int(request.args.get('id')) - 1
     return render_template('user_model_list.html', item1=id_list[id]['item1'], item2=id_list[id]['item2'])
 
+def load_KPI200(name):
+    try:
+        csv = open('data/KPI200.csv', 'r')
+        lines = csv.readlines()
+        for line in lines:
+            dt, ct, ch, pd, cp = line.strip().split(',')
+            KPI200.append(float(cp))
+        csv.close()
+    except:
+        os.system('python evaluate.py {} {}'.format('KPI200', name))
+        load_KPI200(name)
+
 @app.route('/model', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
         f = request.files['file']
         f.save('models/' + f.filename)
+
+
         # produce history
         history = {}
         for c in cc:
@@ -53,23 +67,63 @@ def upload():
 
 @app.route('/history')
 def history():
+    import functions
+    KPI200, t = functions.getStockDataVec('KPI200')
+    KOSPI, t = functions.getStockDataVec('KOSPI')
+
     mdl = request.args.get('model')
     pi = open('result/{}.pickle'.format(mdl), 'rb')
     history = pickle.load(pi)
     pi.close()
     pf = {}
+    scale = {
+        '000660': 100,
+        '005380': 1000,
+        '005490': 1000,
+        '005930': 100,
+        '012330': 1000,
+        '015760': 100,
+        '035420': 100,
+        '051910': 1000,
+        '055550': 100,
+        '105560': 100
+    }
+    order_queue = {}
+    
     for c in cc:
         pf[c] = {}
+        order_queue[c] = {'cnt': 0, 'queue': []}
     li = []
-    for d in sorted(history.keys()): # date
+    transaction = []
+    dates = sorted(history.keys())
+    for i,d in enumerate(dates):  # date
         for c in history[d]: # code
             pf[c]['cnt'] = history[d][c][0]
             pf[c]['cash'] = history[d][c][1]
             pf[c]['pf'] = history[d][c][2]
+
+            if int(history[d][c][0]) > order_queue[c]['cnt']:
+                transaction.append({
+                    'date': d,
+                    'code': c,
+                    'cnt': int(history[d][c][0]) - order_queue[c]['cnt'],
+                    'price': float(history[d][c][3]) * scale[c],
+                    'profit': '-'})
+                order_queue[c]['queue'].append(float(history[d][c][3]) * scale[c])
+            if int(history[d][c][0]) < order_queue[c]['cnt']:
+                transaction.append({
+                    'date': d,
+                    'code': c,
+                    'cnt': int(history[d][c][0]) - order_queue[c]['cnt'],
+                    'price': float(history[d][c][3]) * scale[c],
+                    'profit': (float(history[d][c][3]) * scale[c] - order_queue[c]['queue'].pop(0)) * (order_queue[c]['cnt'] - int(history[d][c][0]))})
+            order_queue[c]['cnt'] = int(history[d][c][0])
+            
         daily_pf = 0
         for c in pf:
             daily_pf += float(pf[c]['pf'])
         li.append(daily_pf)
+
     
     today = []
     cash = 0
@@ -80,7 +134,7 @@ def history():
     today.append(cash)
     #today['cash'] = cash
     
-    return json.dumps({'li': li, 'xlabel': sorted(history.keys()), 'today': today})
+    return json.dumps({'li': li, 'KPI200': KPI200, 'KOSPI': KOSPI, 'xlabel': sorted(history.keys()), 'today': today, 'transaction': transaction})
     # f = open('history/{}.csv', )
 
 @app.route('/model_list')
@@ -88,10 +142,12 @@ def model_list():
     f = open('result/list.txt', 'r')
     models = f.readlines()
     res = []
+
     for model in models:
         pi = open('result/{}.pickle'.format(model.strip()), 'rb')
         history = pickle.load(pi)
         pi.close()
+
         dates = sorted(history.keys())
         last_pf = 0
         for c in history[dates[-1]]:
@@ -99,12 +155,13 @@ def model_list():
         first_pf = 0
         for c in history[dates[0]]:
             first_pf += float(history[dates[0]][c][2])
+        
         import datetime
         ee = datetime.datetime.strptime(dates[-1], '%Y-%m-%d')
         ss = datetime.datetime.strptime(dates[0], '%Y-%m-%d')
         yy = (ee - ss).days / 365
         rate = math.log(last_pf / first_pf) / yy * 10000
-        res.append({'name': model, 'rate': round(rate)/100 })
+        res.append({'name': model, 'rate': round(rate) / 100})
     f.close()
     res.sort(key=lambda item: item['rate'], reverse=True)
-    return render_template('user_model_list.html', model_list=res )
+    return render_template('user_model_list.html', model_list=res)

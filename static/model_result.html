@@ -63,13 +63,21 @@
 							lineTension: 0,
 							borderColor: 'red',
 							borderWidth: 1
-						}/*, {
-							label: 'data',
+						}, {
+							label: 'KPI200',
 							fill: false,
-							data: data2,
+							data: r.KPI200.map(el => el/r.KPI200[0]*100),
 							lineTension: 0,
-							borderColor: 'blue'
-						}*/]
+							borderColor: 'blue',
+							borderWidth: 1
+						}, {
+							label: 'KOSPI',
+							fill: false,
+							data: r.KOSPI.map(el => el/r.KOSPI[0]*100),
+							lineTension: 0,
+							borderColor: 'green',
+							borderWidth: 1
+						}]
 					},
 					options:{
 						scales: {
@@ -99,11 +107,28 @@
 						}]
 					},
 				});
+
+				$tbl = $('.scrolltable table');
+				$tbdy = $('tbody', $tbl);
+				code_labels = {'005930': "삼성전자", '005380': "현대차", '005490': "POSCO", '012330': "현대모비스", '051910': "LG화학", '015760': "한국전력", '000660': "SK하이닉스", '055550': "신한지주", '035420': "NAVER", '105560': "KB금융"}
+				r.transaction.forEach(element => {
+					$tbdy.append(`<tr><td>${element.date}</td><td>${code_labels[element.code]}</td><td>${element.price}</td><td>${element.profit}</td></tr>`);
+				});
 			});
 			
 		});
 	</script>
-	
+	<style>
+		table {
+		  width: 100%;
+		  border-top: 1px solid #444444;
+		  border-collapse: collapse;
+		}
+		th, td {
+		  border-bottom: 1px solid #444444;
+		  padding: 10px;
+		}
+	  </style>
 </head>
 
 <body>
@@ -115,12 +140,12 @@
 					<div class="opener-holder">
 						<a href="#" class="nav-opener"><span></span></a>
 					</div>
-					<a href="investor.html" class="btn btn-primary rounded">투자자/개발자</a>
+					<a href="http://tympanus.net/codrops/?p=23525" class="btn btn-primary rounded">투자자/개발자</a>
 					<div class="nav-drop">
 						<ul>
 							<li><a href="index.html">About Stock Plantation</a></li>
-							<li><a href="doc.html">Data Description</a></li>
-							<li><a href="backtesting.html">Backtesting & Commit</a></li>
+							<li><a href="doc.html">API Documentation</a></li>
+							<li><a href="backtesting.html?id=1">Backtesting & Commit</a></li>
 						</ul>
 						<div class="drop-holder visible-sm visible-xs">
 							<span>Follow Us</span>
@@ -159,39 +184,18 @@
 					<table>
 						<thead>
 						    <tr>
-								<th>Lorem</th><th>Ipsum</th><th>Dolor</th>
+								<th>날짜</th><th>종목</th><th>가격</th><th>실현손익</th>
 						    </tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>Lorem</td><td>Ipsum</td><td>Dolor</td>
-							</tr>
-							<tr>
-								<td>Lorem</td><td>Ipsum</td><td>Dolor</td>
-							</tr>
-							<tr>
-								<td>Lorem</td><td>Ipsum</td><td>Dolor</td>
-							</tr>
-							<tr>
-								<td>Lorem</td><td>Ipsum</td><td>Dolor</td>
-							</tr>
-							<tr>
-								<td>Lorem</td><td>Ipsum</td><td>Dolor</td>
-							</tr>
-							<tr>
-								<td>Lorem</td><td>Ipsum</td><td>Dolor</td>
-							</tr>
-							<tr>
-								<td>Lorem</td><td>Ipsum</td><td>Dolor</td>
-							</tr>
-							<tr>
-								<td>Lorem</td><td>Ipsum</td><td>Dolor</td>
-							</tr>
 						</tbody>
 					</table>
 				</div>
 			</div>
-        </section>
+			<div class="text-box">
+				<a href="backtesting2.html" class="btn btn-primary rounded">Commit 시작</a>
+			</div>
+        </section>t
 </div>
 
 </body>
