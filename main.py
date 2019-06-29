@@ -57,12 +57,13 @@ def upload():
 @app.route('/history')
 def history():
     import functions
-    KPI200, t = functions.getStockDataVec('KPI200')
-    KOSPI, t = functions.getStockDataVec('KOSPI')
+    KPI200, t1 = functions.getStockDataVec('KPI200')
+    KOSPI, t2 = functions.getStockDataVec('KOSPI')
 
     mdl = request.args.get('model')
     pi = open('result/{}.pickle'.format(mdl), 'rb')
     history = pickle.load(pi)
+    del history['description']
     pi.close()
     pf = {}
     scale = {
