@@ -160,18 +160,19 @@
             <div class="container">
 				<div class="row">
                     <div class="text-box col-md-offset-1 col-md-10">
-						<h2>Model abstraction</h2>
+						<h2>Backtesting result</h2>
+						<h4>연 수익율: <i class="fa fa-caret-up"></i> 3.3&#37;</h4>
 					</div>
                 </div>
 			</div>
 			<div class="chartMobile">
 				<canvas id="balanceChart"></canvas>
 				<div class="text-box col-md-offset-1 col-md-10" style="padding-top: 50px;" >
-					<h2>Portfolio</h2>
+					<h3>Portfolio</h3>
 				</div>
 				<canvas id="portfolioChart"></canvas>
 				<div class="text-box col-md-offset-1 col-md-10" style="padding-top: 40px;">
-					<h2>Transactions</h2>
+					<h3>Transactions</h3>
 				</div>
 				<div class='scrolltable'>
 					<table>
@@ -186,8 +187,13 @@
 				</div>
 			</div>
 			<div class="text-box col-md-offset-1 col-md-10" style="padding-top: 40px">
-				<div style="padding-top: 40px; padding-bottom: 20px">
-					<a href="investor.html" class="btn btn-primary rounded">돌아가기</a>
+				<div style="padding-top: 10px; padding-bottom: 20px">
+					<form action="/investor.html" method="POST" enctype="multipart/form-data">
+						<div style="padding-top: 30px; padding-bottom: 30px">
+							<p>투자할 금액을 기입해주세요</p><input type="TEXT" name="description" size="20">원
+						</div>	
+					</form>
+					<a href="investor.html" class="btn btn-primary rounded">투자하기</a>
 				</div>
 			</div>
         </section>
