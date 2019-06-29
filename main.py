@@ -136,6 +136,8 @@ def model_list():
     for model in models:
         pi = open('result/{}.pickle'.format(model.strip()), 'rb')
         history = pickle.load(pi)
+        desc = history['description']
+        del history['description']
         pi.close()
 
         dates = sorted(history.keys())
@@ -151,7 +153,7 @@ def model_list():
         ss = datetime.datetime.strptime(dates[0], '%Y-%m-%d')
         yy = (ee - ss).days / 365
         rate = math.log(last_pf / first_pf) / yy * 10000
-        res.append({'name': model, 'rate': round(rate) / 100, 'description': history['description']})
+        res.append({'name': model, 'rate': round(rate) / 100, 'description': desc})
     f.close()
     res.sort(key=lambda item: item['rate'], reverse=True)
     return render_template('user_model_list.html', model_list=res)
