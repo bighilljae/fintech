@@ -70,6 +70,13 @@
 							lineTension: 0,
 							borderColor: 'blue',
 							borderWidth: 1
+						}, {
+							label: 'KOSPI',
+							fill: false,
+							data: r.KOSPI.map(el => el/r.KOSPI[0]*100),
+							lineTension: 0,
+							borderColor: 'green',
+							borderWidth: 1
 						}]
 					},
 					options:{

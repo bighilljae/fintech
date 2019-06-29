@@ -69,6 +69,7 @@ def upload():
 def history():
     import functions
     KPI200, t = functions.getStockDataVec('KPI200')
+    KOSPI, t = functions.getStockDataVec('KOSPI')
 
     mdl = request.args.get('model')
     pi = open('result/{}.pickle'.format(mdl), 'rb')
@@ -133,7 +134,7 @@ def history():
     today.append(cash)
     #today['cash'] = cash
     
-    return json.dumps({'li': li, 'KPI200': KPI200, 'xlabel': sorted(history.keys()), 'today': today, 'transaction': transaction})
+    return json.dumps({'li': li, 'KPI200': KPI200, 'KOSPI': KOSPI, 'xlabel': sorted(history.keys()), 'today': today, 'transaction': transaction})
     # f = open('history/{}.csv', )
 
 @app.route('/model_list')
