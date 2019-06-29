@@ -32,6 +32,7 @@ def upload():
 
         # produce history
         history = {}
+        history['description'] = request.form['description']
         for c in cc:
             os.system('python evaluate.py {} {}'.format(c, f.filename))
             csv = open('temp/res_{}.csv'.format(c), 'r')
@@ -149,7 +150,7 @@ def model_list():
         ss = datetime.datetime.strptime(dates[0], '%Y-%m-%d')
         yy = (ee - ss).days / 365
         rate = math.log(last_pf / first_pf) / yy * 10000
-        res.append({'name': model, 'rate': round(rate) / 100})
+        res.append({'name': model, 'rate': round(rate) / 100, 'description': history['description']})
     f.close()
     res.sort(key=lambda item: item['rate'], reverse=True)
     return render_template('user_model_list.html', model_list=res)
