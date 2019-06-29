@@ -28,6 +28,42 @@
 		<link rel="stylesheet" href="fonts/font-awesome-4.3.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="css/all.css">
 		<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Source+Sans+Pro:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		<script type="text/javascript">
+			function Login()
+			{
+				const form = document.loginForm;
+					if (form.user.value == "")
+					{
+						alert("아이디를 입력해야 합니다!");
+						form.user.focus();
+						return;
+					}
+					for (var i=0; i<form.user.value.length; i++)
+					{
+						const ch = form.user.value.charAt(i);
+						if ( ( ch < "a" || ch > "z") && (ch < "A" || ch > "Z") && (ch < "0" || ch > "9" ) )
+						{
+							alert("아이디는 영문 소문자로만 입력 가능 합니다!");
+							form.user.select();
+							return;
+						}
+					}
+					if (!isNaN(form.user.value.substr(0,1)))
+					{
+						alert("아이디는 숫자로 시작할 수 없습니다!");
+						form.user.select();
+						return;
+					}
+					if (form.pass.value == "")
+					{
+						alert("패스워드를 입력 해야 합니다!");
+						form.pass.focus();//포커스를 Password박스로 이동.
+						return;
+					}
+				alert("환영합니다.");
+				form.submit();
+			}
+		</script>
 	</head>
 	<body>
 		<div id="wrapper">
@@ -63,10 +99,10 @@
 						<div class="text-box col-md-offset-1 col-md-10">
                             <h2>Login</h2>
                             <div class="login-card" style="padding: 10px; width: 300px">
-								<form>
+								<form name="loginForm" action="/investor.html">
 									<input type="text" name="user" placeholder="Username">
 									<input type="password" name="pass" placeholder="Password">
-									<a href="investor.html" class="btn btn-primary rounded" style="padding-top: 10px">Login</a>
+									<a onclick="Login()" class="btn btn-primary rounded" style="padding-top: 10px">Login</a>
 									<a href="signup.html" class="btn btn-primary rounded" style="padding-top: 10px">Sign Up</a>
 								</form>
 							</div>
