@@ -12,7 +12,7 @@ id_list = [{'item1': 'https://datastudio.google.com/embed/reporting/1BPUO86dh2Kd
             'item2': 'https://datastudio.google.com/embed/reporting/18UA4eqZiruDn02J0mR2cLICn9bZImgQK/page/144s'}]
 #     삼성전자,    현대차,    POSCO,    현대모비스,  LG화학,    한국전력,   SK하이닉스, 신한지주, NAVER, KB
 cc = ['005930', '005380', '005490', '012330', '051910', '015760', '000660', '055550', '035420', '105560']
-invest = [{'name': 'KOSPI200', 'current': 6960095, 'diff': 455432}, {'name': '운수장비 섹터','current': 5182538, 'diff': 170345}]
+invest = [{'name': '투자한 모델이 이런식으로 표시됩니다', 'current': 10500, 'diff': 4554}, {'name': 'KOSPI200','current': 20500, 'diff': 1703}]
 
 @app.route('/')
 def index():
