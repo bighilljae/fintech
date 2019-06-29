@@ -118,6 +118,11 @@ def history():
                     'profit': (float(history[d][c][3]) * scale[c] - order_queue[c]['queue'].pop(0)) * (order_queue[c]['cnt'] - int(history[d][c][0]))})
             order_queue[c]['cnt'] = int(history[d][c][0])
         
+        daily_pf = 0
+        for c in pf:
+            daily_pf += float(pf[c]['pf'])
+        li.append(daily_pf)
+
         cur_day+=1
     
     # added to compute Sharpe and danger ratio
@@ -132,12 +137,6 @@ def history():
     R_f = history_sum[len(history_sum)-1]-history_sum[0]
 
     sharpe = (diff_avg-R_f)/diff_std/math.sqrt(len(history_sum))
-
-    daily_pf = 0
-    for c in pf:
-        daily_pf += float(pf[c]['pf'])
-    li.append(daily_pf)
-
     
     today = []
     cash = 0
