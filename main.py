@@ -4,6 +4,7 @@ import pickle
 import os.path
 import sys
 import json
+import numpy
 
 app = Flask(__name__, static_folder='static/', static_url_path='')
 
@@ -96,11 +97,19 @@ def history():
     li = []
     transaction = []
     dates = sorted(history.keys())
+
+    history_sum = []
+    for i in range(len(dates)):
+        history_sum.append(0)
+    
     for i,d in enumerate(dates):  # date
+        cur_day = 0
         for c in history[d]: # code
             pf[c]['cnt'] = history[d][c][0]
             pf[c]['cash'] = history[d][c][1]
             pf[c]['pf'] = history[d][c][2]
+
+            history_sum[cur_day] += float(history[d][c][2])
 
             if int(history[d][c][0]) > order_queue[c]['cnt']:
                 transaction.append({
@@ -118,11 +127,26 @@ def history():
                     'price': float(history[d][c][3]) * scale[c],
                     'profit': (float(history[d][c][3]) * scale[c] - order_queue[c]['queue'].pop(0)) * (order_queue[c]['cnt'] - int(history[d][c][0]))})
             order_queue[c]['cnt'] = int(history[d][c][0])
-            
-        daily_pf = 0
-        for c in pf:
-            daily_pf += float(pf[c]['pf'])
-        li.append(daily_pf)
+        
+        cur_day+=1
+    
+    # added to compute Sharpe and danger ratio
+    diff = []
+    for i in range(1,len(history_sum)):
+        diff.append(history_sum[i]-history_sum[i-1])
+      
+    #diff_avg = sum(diff,0)/len(diff)
+    diff_avg = numpy.mean(diff)
+    diff_std = numpy.std(diff)
+    
+    R_f = history_sum[len(history_sum)-1]-history_sum[0]
+
+    sharpe = (diff_avg-R_f)/diff_std/math.sqrt(len(history_sum))
+
+    daily_pf = 0
+    for c in pf:
+        daily_pf += float(pf[c]['pf'])
+    li.append(daily_pf)
 
     
     today = []
@@ -134,7 +158,7 @@ def history():
     today.append(cash)
     #today['cash'] = cash
     
-    return json.dumps({'li': li, 'KPI200': KPI200, 'KOSPI': KOSPI, 'xlabel': sorted(history.keys()), 'today': today, 'transaction': transaction})
+    return json.dumps({'li': li, 'KPI200': KPI200, 'KOSPI': KOSPI, 'xlabel': sorted(history.keys()), 'today': today, 'transaction': transaction, 'sharpe': sharpe})
     # f = open('history/{}.csv', )
 
 @app.route('/model_list')
